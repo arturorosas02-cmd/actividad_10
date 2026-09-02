@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Animales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6f7;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #d9d9d9;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 11px 16px;
+            border-top: 1px solid #e5e5e5;
+            color: #333;
+        }
+
+        tr:hover td {
+            background-color: #f1f3f5;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Subcategoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mamífero</td>
+                <td>Felinos</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Cánidos</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Primates</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Roedores</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Marsupiales</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Mamíferos marinos</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Ungulados</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Murciélagos</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Osos</td>
+            </tr>
+            <tr>
+                <td>Mamífero</td>
+                <td>Lagomorfos</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Rapaces</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Aves acuáticas</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Aves marinas</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Pájaros cantores</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Loros</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Aves corredoras</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Palomas</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Gallináceas</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Búhos</td>
+            </tr>
+            <tr>
+                <td>Ave</td>
+                <td>Pingüinos</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces de agua dulce</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces de agua salada</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Tiburones</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Rayas</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces tropicales</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces de fondo</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces migratorios</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces cartilaginosos</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces depredadores</td>
+            </tr>
+            <tr>
+                <td>Pez</td>
+                <td>Peces de arrecife</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Serpientes</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Lagartos</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Tortugas</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Cocodrilos</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Camaleones</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Iguanas</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Geckos</td>
+            </tr>
+            <tr>
+                <td>Reptil</td>
+                <td>Varanos</td>
+            </tr>
+            <tr>
+                <td>Anfibio</td>
+                <td>Ranas</td>
+            </tr>
+            <tr>
+                <td>Anfibio</td>
+                <td>Sapos</td>
+            </tr>
+            <tr>
+                <td>Anfibio</td>
+                <td>Salamandras</td>
+            </tr>
+            <tr>
+                <td>Anfibio</td>
+                <td>Tritones</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Mariposas</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Escarabajos</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Abejas</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Hormigas</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Libélulas</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Saltamontes</td>
+            </tr>
+            <tr>
+                <td>Insecto</td>
+                <td>Mantis</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
