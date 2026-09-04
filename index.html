@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Pensamiento Computacional y Programación</title>
 
     <style>
@@ -12,107 +13,185 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
-            min-height: 100vh;
             overflow: hidden;
             font-family: Arial, Helvetica, sans-serif;
             background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
             color: white;
+
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Fondo de partículas */
+        /* ==========================================
+           CANVAS
+        ========================================== */
+
         #canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
         }
 
-        /* Contenedor principal */
+        /* ==========================================
+           CONTENEDOR
+        ========================================== */
+
         .contenedor {
             position: relative;
             z-index: 2;
+
             width: 90%;
             max-width: 900px;
+
             padding: 60px 30px;
+
             text-align: center;
-            background: rgba(255, 255, 255, 0.10);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
             border-radius: 30px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            animation: aparecer 1.5s ease;
+
+            backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.35);
+
+            animation: aparecer 1s ease;
         }
+
+        /* ==========================================
+           TITULO
+        ========================================== */
 
         h1 {
             font-size: clamp(2.5rem, 7vw, 5rem);
+
             line-height: 1.1;
+
             margin-bottom: 25px;
-            color: #ffffff;
+
             text-shadow:
-                0 0 10px #38bdf8,
-                0 0 25px #38bdf8,
-                0 0 50px #8b5cf6;
+                0 0 10px rgba(56, 189, 248, 0.8),
+                0 0 30px rgba(139, 92, 246, 0.5);
+
             animation: flotar 3s ease-in-out infinite;
         }
 
         .subtitulo {
             font-size: 1.3rem;
+
             color: #c4b5fd;
+
             margin-bottom: 35px;
         }
 
+        /* ==========================================
+           BLOQUE DE CODIGO
+        ========================================== */
+
         .codigo {
             display: inline-block;
+
             padding: 15px 25px;
+
             border-radius: 15px;
+
             background: #020617;
+
             color: #38bdf8;
+
             font-family: "Courier New", monospace;
+
             font-size: 1.1rem;
-            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.15);
+
+            border: 1px solid rgba(56, 189, 248, 0.2);
         }
+
+        /* ==========================================
+           BOTON
+        ========================================== */
 
         .boton {
             margin-top: 35px;
+
             padding: 15px 30px;
+
             border: none;
+
             border-radius: 50px;
-            background: linear-gradient(90deg, #06b6d4, #8b5cf6);
+
+            background: linear-gradient(
+                90deg,
+                #06b6d4,
+                #8b5cf6
+            );
+
             color: white;
+
             font-size: 1.1rem;
+
             font-weight: bold;
+
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .boton:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #38bdf8;
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 25px rgba(56, 189, 248, 0.7);
         }
 
-        /* Emoji que aparece al hacer clic */
+        .boton:active {
+            transform: scale(0.95);
+        }
+
+        /* ==========================================
+           EMOJIS
+        ========================================== */
+
         .emoji {
             position: fixed;
+
             pointer-events: none;
-            font-size: 35px;
+
+            font-size: 32px;
+
             z-index: 10;
-            animation: subir 1.5s ease-out forwards;
+
+            animation: subir 1.2s ease-out forwards;
+
+            will-change: transform, opacity;
         }
+
+        /* ==========================================
+           ANIMACIONES CSS
+        ========================================== */
 
         @keyframes aparecer {
             from {
                 opacity: 0;
-                transform: scale(0.7) translateY(50px);
+                transform: scale(0.8);
             }
+
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: scale(1);
             }
         }
 
@@ -120,24 +199,36 @@
             0%, 100% {
                 transform: translateY(0);
             }
+
             50% {
-                transform: translateY(-12px);
+                transform: translateY(-10px);
             }
         }
 
         @keyframes subir {
             0% {
                 opacity: 1;
-                transform: translateY(0) scale(1) rotate(0deg);
+                transform:
+                    translate3d(0, 0, 0)
+                    scale(1)
+                    rotate(0deg);
             }
 
             100% {
                 opacity: 0;
-                transform: translateY(-150px) scale(1.8) rotate(30deg);
+                transform:
+                    translate3d(0, -130px, 0)
+                    scale(1.5)
+                    rotate(25deg);
             }
         }
 
+        /* ==========================================
+           MOVILES
+        ========================================== */
+
         @media (max-width: 600px) {
+
             .contenedor {
                 padding: 40px 20px;
             }
@@ -147,7 +238,26 @@
             }
 
             .codigo {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+                padding: 12px 15px;
+            }
+
+            .boton {
+                font-size: 1rem;
+            }
+        }
+
+        /* ==========================================
+           REDUCIR ANIMACIONES SI EL USUARIO LO PIDE
+        ========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -157,8 +267,13 @@
 
     <canvas id="canvas"></canvas>
 
-    <div class="contenedor">
-        <h1>Pensamiento Computacional<br>y Programación</h1>
+    <main class="contenedor">
+
+        <h1>
+            Pensamiento Computacional
+            <br>
+            y Programación
+        </h1>
 
         <p class="subtitulo">
             💡 ¡Piensa, crea, programa y diviértete!
@@ -173,131 +288,345 @@
         <button class="boton" id="boton">
             🚀 ¡Haz clic!
         </button>
-    </div>
+
+    </main>
+
 
     <script>
-        // ==========================================
-        // ANIMACIÓN DE PARTÍCULAS
-        // ==========================================
+
+        // ==================================================
+        // CANVAS OPTIMIZADO
+        // ==================================================
 
         const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", {
+            alpha: true
+        });
+
+        let ancho;
+        let alto;
 
         let particulas = [];
 
+        // Cantidad moderada de partículas
+        const cantidadParticulas = 55;
+
+        // Distancia máxima para conectar partículas
+        const distanciaMaxima = 130;
+
+        // ==================================================
+        // AJUSTAR CANVAS
+        // ==================================================
+
         function ajustarCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+
+            const dpr = Math.min(
+                window.devicePixelRatio || 1,
+                1.5
+            );
+
+            ancho = window.innerWidth;
+            alto = window.innerHeight;
+
+            canvas.width = ancho * dpr;
+            canvas.height = alto * dpr;
+
+            canvas.style.width = ancho + "px";
+            canvas.style.height = alto + "px";
+
+            ctx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
         }
 
-        window.addEventListener("resize", ajustarCanvas);
+        window.addEventListener(
+            "resize",
+            ajustarCanvas,
+            { passive: true }
+        );
+
         ajustarCanvas();
 
-        // Crear partículas
-        for (let i = 0; i < 100; i++) {
-            particulas.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                tamaño: Math.random() * 3 + 1,
-                velocidadX: (Math.random() - 0.5) * 1.5,
-                velocidadY: (Math.random() - 0.5) * 1.5,
-                color: Math.random() > 0.5 ? "#38bdf8" : "#a78bfa"
-            });
+
+        // ==================================================
+        // CREAR PARTICULAS
+        // ==================================================
+
+        function crearParticulas() {
+
+            particulas.length = 0;
+
+            for (
+                let i = 0;
+                i < cantidadParticulas;
+                i++
+            ) {
+
+                particulas.push({
+
+                    x: Math.random() * ancho,
+
+                    y: Math.random() * alto,
+
+                    radio: Math.random() * 2 + 1,
+
+                    vx:
+                        (Math.random() - 0.5)
+                        * 0.5,
+
+                    vy:
+                        (Math.random() - 0.5)
+                        * 0.5,
+
+                    color:
+                        Math.random() > 0.5
+                        ? "#38bdf8"
+                        : "#a78bfa"
+                });
+            }
         }
 
-        function animarParticulas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        crearParticulas();
 
-            particulas.forEach(p => {
-                p.x += p.velocidadX;
-                p.y += p.velocidadY;
 
-                // Si sale de la pantalla, vuelve a aparecer
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
+        // ==================================================
+        // ACTUALIZAR PARTICULAS
+        // ==================================================
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.tamaño, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = p.color;
-                ctx.fill();
-            });
+        function actualizar() {
 
-            // Dibujar líneas entre partículas cercanas
-            for (let i = 0; i < particulas.length; i++) {
-                for (let j = i + 1; j < particulas.length; j++) {
+            for (const p of particulas) {
 
-                    const dx = particulas[i].x - particulas[j].x;
-                    const dy = particulas[i].y - particulas[j].y;
-                    const distancia = Math.sqrt(dx * dx + dy * dy);
+                p.x += p.vx;
+                p.y += p.vy;
 
-                    if (distancia < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particulas[i].x, particulas[i].y);
-                        ctx.lineTo(particulas[j].x, particulas[j].y);
+                // Rebote horizontal
+                if (
+                    p.x < 0 ||
+                    p.x > ancho
+                ) {
+                    p.vx *= -1;
+                }
+
+                // Rebote vertical
+                if (
+                    p.y < 0 ||
+                    p.y > alto
+                ) {
+                    p.vy *= -1;
+                }
+            }
+        }
+
+
+        // ==================================================
+        // DIBUJAR PARTICULAS
+        // ==================================================
+
+        function dibujar() {
+
+            ctx.clearRect(
+                0,
+                0,
+                ancho,
+                alto
+            );
+
+
+            // ----------------------------------------------
+            // LINEAS
+            // ----------------------------------------------
+
+            for (
+                let i = 0;
+                i < particulas.length;
+                i++
+            ) {
+
+                const p1 = particulas[i];
+
+                for (
+                    let j = i + 1;
+                    j < particulas.length;
+                    j++
+                ) {
+
+                    const p2 = particulas[j];
+
+                    const dx =
+                        p1.x - p2.x;
+
+                    const dy =
+                        p1.y - p2.y;
+
+                    const distanciaCuadrada =
+                        dx * dx + dy * dy;
+
+                    // Evitamos Math.sqrt si están lejos
+                    if (
+                        distanciaCuadrada <
+                        distanciaMaxima *
+                        distanciaMaxima
+                    ) {
+
+                        const distancia =
+                            Math.sqrt(
+                                distanciaCuadrada
+                            );
+
+                        const opacidad =
+                            (1 - distancia /
+                            distanciaMaxima)
+                            * 0.3;
 
                         ctx.strokeStyle =
-                            "rgba(129, 140, 248, " +
-                            (1 - distancia / 120) * 0.4 +
-                            ")";
+                            `rgba(129,140,248,${opacidad})`;
 
                         ctx.lineWidth = 1;
+
+                        ctx.beginPath();
+
+                        ctx.moveTo(
+                            p1.x,
+                            p1.y
+                        );
+
+                        ctx.lineTo(
+                            p2.x,
+                            p2.y
+                        );
+
                         ctx.stroke();
                     }
                 }
             }
 
-            requestAnimationFrame(animarParticulas);
+
+            // ----------------------------------------------
+            // PARTICULAS
+            // ----------------------------------------------
+
+            for (const p of particulas) {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    p.x,
+                    p.y,
+                    p.radio,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle = p.color;
+
+                ctx.fill();
+            }
         }
 
-        animarParticulas();
+
+        // ==================================================
+        // BUCLE DE ANIMACION
+        // ==================================================
+
+        function animar() {
+
+            actualizar();
+
+            dibujar();
+
+            requestAnimationFrame(animar);
+        }
+
+        animar();
 
 
-        // ==========================================
-        // ANIMACIÓN AL HACER CLIC
-        // ==========================================
+        // ==================================================
+        // BOTON
+        // ==================================================
 
-        const boton = document.getElementById("boton");
+        const boton =
+            document.getElementById("boton");
 
-        const emojis = ["💻", "🚀", "🧠", "⚡", "🤖", "💡", "🎮", "✨"];
+        const emojis = [
+            "💻",
+            "🚀",
+            "🧠",
+            "⚡",
+            "🤖",
+            "💡",
+            "🎮",
+            "✨"
+        ];
 
-        boton.addEventListener("click", function(event) {
 
-            for (let i = 0; i < 12; i++) {
+        boton.addEventListener(
+            "click",
+            function(event) {
 
-                const emoji = document.createElement("div");
+                // Menos emojis = mejor rendimiento
+                for (
+                    let i = 0;
+                    i < 8;
+                    i++
+                ) {
 
-                emoji.classList.add("emoji");
+                    const emoji =
+                        document.createElement("div");
 
-                emoji.textContent =
-                    emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.className =
+                        "emoji";
 
-                emoji.style.left =
-                    (event.clientX + (Math.random() - 0.5) * 150) + "px";
+                    emoji.textContent =
+                        emojis[
+                            Math.floor(
+                                Math.random() *
+                                emojis.length
+                            )
+                        ];
 
-                emoji.style.top =
-                    (event.clientY + (Math.random() - 0.5) * 50) + "px";
+                    emoji.style.left =
+                        (
+                            event.clientX +
+                            (Math.random() - 0.5)
+                            * 120
+                        ) + "px";
 
-                emoji.style.animationDuration =
-                    (1 + Math.random() * 1) + "s";
+                    emoji.style.top =
+                        (
+                            event.clientY
+                        ) + "px";
 
-                document.body.appendChild(emoji);
+                    document.body.appendChild(
+                        emoji
+                    );
 
-                setTimeout(() => {
-                    emoji.remove();
-                }, 2000);
+                    setTimeout(
+                        () => emoji.remove(),
+                        1300
+                    );
+                }
+
+
+                // Cambiar texto
+                boton.textContent =
+                    "🎉 ¡Programando!";
+
+                setTimeout(
+                    () => {
+                        boton.textContent =
+                            "🚀 ¡Haz clic!";
+                    },
+                    1200
+                );
             }
+        );
 
-            // Cambiar temporalmente el texto
-            boton.textContent = "🎉 ¡Programando!";
-            
-            setTimeout(() => {
-                boton.textContent = "🚀 ¡Haz clic!";
-            }, 1500);
-        });
     </script>
 
 </body>
