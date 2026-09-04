@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pensamiento Computacional y Programación</title>
+    <title>Animación Verde</title>
 
     <style>
         * {
@@ -13,251 +14,156 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
         body {
-            overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
-            color: white;
-
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+
+            background: #050505;
+            font-family: Arial, sans-serif;
         }
 
-        /* ==========================================
-           CANVAS
-        ========================================== */
-
-        #canvas {
-            position: fixed;
+        /* Fondo animado */
+        .fondo {
+            position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            overflow: hidden;
         }
 
-        /* ==========================================
-           CONTENEDOR
-        ========================================== */
+        .luz {
+            position: absolute;
+            width: 300px;
+            height: 300px;
 
+            background: #00ff66;
+            border-radius: 50%;
+
+            filter: blur(100px);
+            opacity: 0.25;
+
+            animation: movimiento 8s infinite alternate ease-in-out;
+        }
+
+        .luz:nth-child(1) {
+            top: 10%;
+            left: 10%;
+        }
+
+        .luz:nth-child(2) {
+            right: 10%;
+            bottom: 10%;
+
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+
+        @keyframes movimiento {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(200px, -100px) scale(1.3);
+            }
+
+            100% {
+                transform: translate(-100px, 150px) scale(0.8);
+            }
+        }
+
+        /* Contenedor principal */
         .contenedor {
             position: relative;
             z-index: 2;
 
-            width: 90%;
-            max-width: 900px;
-
-            padding: 60px 30px;
+            width: 400px;
+            padding: 40px;
 
             text-align: center;
 
-            background: rgba(255, 255, 255, 0.08);
-
-            border: 1px solid rgba(255, 255, 255, 0.15);
-
-            border-radius: 30px;
-
-            backdrop-filter: blur(8px);
+            background: rgba(10, 20, 15, 0.8);
+            border: 1px solid rgba(0, 255, 102, 0.4);
+            border-radius: 20px;
 
             box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.35);
+                0 0 30px rgba(0, 255, 102, 0.15),
+                inset 0 0 30px rgba(0, 255, 102, 0.03);
 
-            animation: aparecer 1s ease;
+            backdrop-filter: blur(10px);
         }
-
-        /* ==========================================
-           TITULO
-        ========================================== */
 
         h1 {
-            font-size: clamp(2.5rem, 7vw, 5rem);
-
-            line-height: 1.1;
-
-            margin-bottom: 25px;
+            color: #00ff66;
+            margin-bottom: 15px;
 
             text-shadow:
-                0 0 10px rgba(56, 189, 248, 0.8),
-                0 0 30px rgba(139, 92, 246, 0.5);
-
-            animation: flotar 3s ease-in-out infinite;
+                0 0 10px #00ff66,
+                0 0 30px rgba(0, 255, 102, 0.5);
         }
 
-        .subtitulo {
-            font-size: 1.3rem;
-
-            color: #c4b5fd;
-
-            margin-bottom: 35px;
+        p {
+            color: #b8cfc1;
+            margin-bottom: 25px;
         }
 
-        /* ==========================================
-           BLOQUE DE CODIGO
-        ========================================== */
+        button {
+            padding: 12px 25px;
 
-        .codigo {
-            display: inline-block;
+            border: 1px solid #00ff66;
+            border-radius: 8px;
 
-            padding: 15px 25px;
+            background: transparent;
+            color: #00ff66;
 
-            border-radius: 15px;
-
-            background: #020617;
-
-            color: #38bdf8;
-
-            font-family: "Courier New", monospace;
-
-            font-size: 1.1rem;
-
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        /* ==========================================
-           BOTON
-        ========================================== */
-
-        .boton {
-            margin-top: 35px;
-
-            padding: 15px 30px;
-
-            border: none;
-
-            border-radius: 50px;
-
-            background: linear-gradient(
-                90deg,
-                #06b6d4,
-                #8b5cf6
-            );
-
-            color: white;
-
-            font-size: 1.1rem;
-
-            font-weight: bold;
-
+            font-size: 16px;
             cursor: pointer;
 
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
+            transition: 0.3s;
         }
 
-        .boton:hover {
-            transform: scale(1.08);
+        button:hover {
+            background: #00ff66;
+            color: #050505;
 
             box-shadow:
-                0 0 25px rgba(56, 189, 248, 0.7);
+                0 0 15px #00ff66,
+                0 0 40px rgba(0, 255, 102, 0.5);
         }
 
-        .boton:active {
-            transform: scale(0.95);
-        }
+        /* Efecto de partículas */
+        .particula {
+            position: absolute;
 
-        /* ==========================================
-           EMOJIS
-        ========================================== */
+            width: 4px;
+            height: 4px;
 
-        .emoji {
-            position: fixed;
+            background: #00ff66;
+            border-radius: 50%;
 
-            pointer-events: none;
+            box-shadow: 0 0 10px #00ff66;
 
-            font-size: 32px;
-
-            z-index: 10;
-
-            animation: subir 1.2s ease-out forwards;
-
-            will-change: transform, opacity;
-        }
-
-        /* ==========================================
-           ANIMACIONES CSS
-        ========================================== */
-
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes flotar {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
+            animation: subir linear infinite;
         }
 
         @keyframes subir {
-            0% {
-                opacity: 1;
-                transform:
-                    translate3d(0, 0, 0)
-                    scale(1)
-                    rotate(0deg);
-            }
-
-            100% {
+            from {
+                transform: translateY(100vh);
                 opacity: 0;
-                transform:
-                    translate3d(0, -130px, 0)
-                    scale(1.5)
-                    rotate(25deg);
-            }
-        }
-
-        /* ==========================================
-           MOVILES
-        ========================================== */
-
-        @media (max-width: 600px) {
-
-            .contenedor {
-                padding: 40px 20px;
             }
 
-            .subtitulo {
-                font-size: 1rem;
+            20% {
+                opacity: 1;
             }
 
-            .codigo {
-                font-size: 0.8rem;
-                padding: 12px 15px;
+            80% {
+                opacity: 1;
             }
 
-            .boton {
-                font-size: 1rem;
-            }
-        }
-
-        /* ==========================================
-           REDUCIR ANIMACIONES SI EL USUARIO LO PIDE
-        ========================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
-                transition: none !important;
+            to {
+                transform: translateY(-20px);
+                opacity: 0;
             }
         }
     </style>
@@ -265,369 +171,74 @@
 
 <body>
 
-    <canvas id="canvas"></canvas>
+    <!-- Luces del fondo -->
+    <div class="fondo">
+        <div class="luz"></div>
+        <div class="luz"></div>
+    </div>
 
-    <main class="contenedor">
+    <!-- Contenido -->
+    <div class="contenedor">
+        <h1>Animación Verde</h1>
 
-        <h1>
-            Pensamiento Computacional
-            <br>
-            y Programación
-        </h1>
-
-        <p class="subtitulo">
-            💡 ¡Piensa, crea, programa y diviértete!
+        <p>
+            HTML + CSS + JavaScript
         </p>
 
-        <div class="codigo">
-            &lt;h1&gt;¡Buen día estudiantes del CMD!&lt;/h1&gt;
-        </div>
-
-        <br>
-
-        <button class="boton" id="boton">
-            🚀 ¡Haz clic!
+        <button id="boton">
+            Activar efecto
         </button>
-
-    </main>
-
+    </div>
 
     <script>
+        const fondo = document.querySelector(".fondo");
+        const boton = document.querySelector("#boton");
 
-        // ==================================================
-        // CANVAS OPTIMIZADO
-        // ==================================================
+        // Crear partículas
+        function crearParticulas(cantidad) {
 
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d", {
-            alpha: true
+            for (let i = 0; i < cantidad; i++) {
+
+                const particula = document.createElement("div");
+
+                particula.classList.add("particula");
+
+                // Posición horizontal aleatoria
+                particula.style.left = Math.random() * 100 + "%";
+
+                // Duración aleatoria
+                particula.style.animationDuration =
+                    (Math.random() * 5 + 4) + "s";
+
+                // Retraso aleatorio
+                particula.style.animationDelay =
+                    Math.random() * 5 + "s";
+
+                // Tamaño aleatorio
+                const tamaño =
+                    Math.random() * 4 + 2;
+
+                particula.style.width = tamaño + "px";
+                particula.style.height = tamaño + "px";
+
+                fondo.appendChild(particula);
+            }
+        }
+
+        crearParticulas(40);
+
+        // Interacción con el botón
+        boton.addEventListener("click", () => {
+
+            document.body.classList.toggle("activo");
+
+            boton.textContent =
+                document.body.classList.contains("activo")
+                    ? "Efecto activado"
+                    : "Activar efecto";
         });
-
-        let ancho;
-        let alto;
-
-        let particulas = [];
-
-        // Cantidad moderada de partículas
-        const cantidadParticulas = 55;
-
-        // Distancia máxima para conectar partículas
-        const distanciaMaxima = 130;
-
-        // ==================================================
-        // AJUSTAR CANVAS
-        // ==================================================
-
-        function ajustarCanvas() {
-
-            const dpr = Math.min(
-                window.devicePixelRatio || 1,
-                1.5
-            );
-
-            ancho = window.innerWidth;
-            alto = window.innerHeight;
-
-            canvas.width = ancho * dpr;
-            canvas.height = alto * dpr;
-
-            canvas.style.width = ancho + "px";
-            canvas.style.height = alto + "px";
-
-            ctx.setTransform(
-                dpr,
-                0,
-                0,
-                dpr,
-                0,
-                0
-            );
-        }
-
-        window.addEventListener(
-            "resize",
-            ajustarCanvas,
-            { passive: true }
-        );
-
-        ajustarCanvas();
-
-
-        // ==================================================
-        // CREAR PARTICULAS
-        // ==================================================
-
-        function crearParticulas() {
-
-            particulas.length = 0;
-
-            for (
-                let i = 0;
-                i < cantidadParticulas;
-                i++
-            ) {
-
-                particulas.push({
-
-                    x: Math.random() * ancho,
-
-                    y: Math.random() * alto,
-
-                    radio: Math.random() * 2 + 1,
-
-                    vx:
-                        (Math.random() - 0.5)
-                        * 0.5,
-
-                    vy:
-                        (Math.random() - 0.5)
-                        * 0.5,
-
-                    color:
-                        Math.random() > 0.5
-                        ? "#38bdf8"
-                        : "#a78bfa"
-                });
-            }
-        }
-
-        crearParticulas();
-
-
-        // ==================================================
-        // ACTUALIZAR PARTICULAS
-        // ==================================================
-
-        function actualizar() {
-
-            for (const p of particulas) {
-
-                p.x += p.vx;
-                p.y += p.vy;
-
-                // Rebote horizontal
-                if (
-                    p.x < 0 ||
-                    p.x > ancho
-                ) {
-                    p.vx *= -1;
-                }
-
-                // Rebote vertical
-                if (
-                    p.y < 0 ||
-                    p.y > alto
-                ) {
-                    p.vy *= -1;
-                }
-            }
-        }
-
-
-        // ==================================================
-        // DIBUJAR PARTICULAS
-        // ==================================================
-
-        function dibujar() {
-
-            ctx.clearRect(
-                0,
-                0,
-                ancho,
-                alto
-            );
-
-
-            // ----------------------------------------------
-            // LINEAS
-            // ----------------------------------------------
-
-            for (
-                let i = 0;
-                i < particulas.length;
-                i++
-            ) {
-
-                const p1 = particulas[i];
-
-                for (
-                    let j = i + 1;
-                    j < particulas.length;
-                    j++
-                ) {
-
-                    const p2 = particulas[j];
-
-                    const dx =
-                        p1.x - p2.x;
-
-                    const dy =
-                        p1.y - p2.y;
-
-                    const distanciaCuadrada =
-                        dx * dx + dy * dy;
-
-                    // Evitamos Math.sqrt si están lejos
-                    if (
-                        distanciaCuadrada <
-                        distanciaMaxima *
-                        distanciaMaxima
-                    ) {
-
-                        const distancia =
-                            Math.sqrt(
-                                distanciaCuadrada
-                            );
-
-                        const opacidad =
-                            (1 - distancia /
-                            distanciaMaxima)
-                            * 0.3;
-
-                        ctx.strokeStyle =
-                            `rgba(129,140,248,${opacidad})`;
-
-                        ctx.lineWidth = 1;
-
-                        ctx.beginPath();
-
-                        ctx.moveTo(
-                            p1.x,
-                            p1.y
-                        );
-
-                        ctx.lineTo(
-                            p2.x,
-                            p2.y
-                        );
-
-                        ctx.stroke();
-                    }
-                }
-            }
-
-
-            // ----------------------------------------------
-            // PARTICULAS
-            // ----------------------------------------------
-
-            for (const p of particulas) {
-
-                ctx.beginPath();
-
-                ctx.arc(
-                    p.x,
-                    p.y,
-                    p.radio,
-                    0,
-                    Math.PI * 2
-                );
-
-                ctx.fillStyle = p.color;
-
-                ctx.fill();
-            }
-        }
-
-
-        // ==================================================
-        // BUCLE DE ANIMACION
-        // ==================================================
-
-        function animar() {
-
-            actualizar();
-
-            dibujar();
-
-            requestAnimationFrame(animar);
-        }
-
-        animar();
-
-
-        // ==================================================
-        // BOTON
-        // ==================================================
-
-        const boton =
-            document.getElementById("boton");
-
-        const emojis = [
-            "💻",
-            "🚀",
-            "🧠",
-            "⚡",
-            "🤖",
-            "💡",
-            "🎮",
-            "✨"
-        ];
-
-
-        boton.addEventListener(
-            "click",
-            function(event) {
-
-                // Menos emojis = mejor rendimiento
-                for (
-                    let i = 0;
-                    i < 8;
-                    i++
-                ) {
-
-                    const emoji =
-                        document.createElement("div");
-
-                    emoji.className =
-                        "emoji";
-
-                    emoji.textContent =
-                        emojis[
-                            Math.floor(
-                                Math.random() *
-                                emojis.length
-                            )
-                        ];
-
-                    emoji.style.left =
-                        (
-                            event.clientX +
-                            (Math.random() - 0.5)
-                            * 120
-                        ) + "px";
-
-                    emoji.style.top =
-                        (
-                            event.clientY
-                        ) + "px";
-
-                    document.body.appendChild(
-                        emoji
-                    );
-
-                    setTimeout(
-                        () => emoji.remove(),
-                        1300
-                    );
-                }
-
-
-                // Cambiar texto
-                boton.textContent =
-                    "🎉 ¡Programando!";
-
-                setTimeout(
-                    () => {
-                        boton.textContent =
-                            "🚀 ¡Haz clic!";
-                    },
-                    1200
-                );
-            }
-        );
-
     </script>
 
 </body>
 </html>
+```
