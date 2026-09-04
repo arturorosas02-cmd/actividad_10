@@ -25,7 +25,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Fondo animado */
+        /* Fondo */
         .fondo {
             position: absolute;
             inset: 0;
@@ -73,7 +73,7 @@
             }
         }
 
-        /* Contenedor principal */
+        /* Contenedor */
         .contenedor {
             position: relative;
             z-index: 2;
@@ -132,37 +132,50 @@
                 0 0 40px rgba(0, 255, 102, 0.5);
         }
 
-        /* Efecto de partículas */
-        .particula {
-            position: absolute;
+        /* EMOJIS */
 
-            width: 4px;
-            height: 4px;
+        .emoji {
+            position: fixed;
 
-            background: #00ff66;
-            border-radius: 50%;
+            bottom: -50px;
 
-            box-shadow: 0 0 10px #00ff66;
+            font-size: 35px;
 
-            animation: subir linear infinite;
+            pointer-events: none;
+
+            z-index: 10;
+
+            animation: subirEmoji 3s ease-out forwards;
         }
 
-        @keyframes subir {
-            from {
-                transform: translateY(100vh);
+        @keyframes subirEmoji {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(0.5);
+
                 opacity: 0;
             }
 
-            20% {
+            15% {
                 opacity: 1;
             }
 
-            80% {
-                opacity: 1;
+            50% {
+                transform:
+                    translateY(-50vh)
+                    rotate(180deg)
+                    scale(1.2);
             }
 
-            to {
-                transform: translateY(-20px);
+            100% {
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg)
+                    scale(0.8);
+
                 opacity: 0;
             }
         }
@@ -171,7 +184,7 @@
 
 <body>
 
-    <!-- Luces del fondo -->
+    <!-- Fondo -->
     <div class="fondo">
         <div class="luz"></div>
         <div class="luz"></div>
@@ -179,64 +192,140 @@
 
     <!-- Contenido -->
     <div class="contenedor">
+
         <h1>Animación Verde</h1>
 
         <p>
-            HTML + CSS + JavaScript
+            Presiona el botón para lanzar emojis 🎉
         </p>
 
         <button id="boton">
-            Activar efecto
+            ¡Lanzar emojis!
         </button>
+
     </div>
 
+
     <script>
-        const fondo = document.querySelector(".fondo");
+
         const boton = document.querySelector("#boton");
 
-        // Crear partículas
-        function crearParticulas(cantidad) {
+
+        // Lista de emojis disponibles
+
+        const emojis = [
+            "😀",
+            "😂",
+            "😍",
+            "🤩",
+            "🥳",
+            "😎",
+            "🔥",
+            "💚",
+            "✨",
+            "🎉",
+            "🚀",
+            "⭐",
+            "🍀",
+            "💫",
+            "🎊",
+            "👏",
+            "🙌",
+            "❤️",
+            "💎",
+            "🌟"
+        ];
+
+
+        // Función para obtener un emoji aleatorio
+
+        function emojiAleatorio() {
+
+            const posicion =
+                Math.floor(Math.random() * emojis.length);
+
+            return emojis[posicion];
+        }
+
+
+        // Crear un emoji
+
+        function crearEmoji() {
+
+            const emoji =
+                document.createElement("div");
+
+            emoji.classList.add("emoji");
+
+
+            // Elegir emoji
+
+            emoji.textContent =
+                emojiAleatorio();
+
+
+            // Posición horizontal aleatoria
+
+            emoji.style.left =
+                Math.random() * 100 + "vw";
+
+
+            // Tamaño aleatorio
+
+            const tamaño =
+                Math.random() * 30 + 25;
+
+            emoji.style.fontSize =
+                tamaño + "px";
+
+
+            // Duración aleatoria
+
+            emoji.style.animationDuration =
+                Math.random() * 2 + 2 + "s";
+
+
+            // Agregar a la página
+
+            document.body.appendChild(emoji);
+
+
+            // Eliminar después de la animación
+
+            setTimeout(() => {
+
+                emoji.remove();
+
+            }, 4000);
+
+        }
+
+
+        // Al presionar el botón
+
+        boton.addEventListener("click", () => {
+
+            // Crear entre 10 y 20 emojis
+
+            const cantidad =
+                Math.floor(Math.random() * 11) + 10;
+
 
             for (let i = 0; i < cantidad; i++) {
 
-                const particula = document.createElement("div");
+                // Pequeño retraso para que
+                // no aparezcan todos al mismo tiempo
 
-                particula.classList.add("particula");
+                setTimeout(() => {
 
-                // Posición horizontal aleatoria
-                particula.style.left = Math.random() * 100 + "%";
+                    crearEmoji();
 
-                // Duración aleatoria
-                particula.style.animationDuration =
-                    (Math.random() * 5 + 4) + "s";
+                }, i * 80);
 
-                // Retraso aleatorio
-                particula.style.animationDelay =
-                    Math.random() * 5 + "s";
-
-                // Tamaño aleatorio
-                const tamaño =
-                    Math.random() * 4 + 2;
-
-                particula.style.width = tamaño + "px";
-                particula.style.height = tamaño + "px";
-
-                fondo.appendChild(particula);
             }
-        }
 
-        crearParticulas(40);
-
-        // Interacción con el botón
-        boton.addEventListener("click", () => {
-
-            document.body.classList.toggle("activo");
-
-            boton.textContent =
-                document.body.classList.contains("activo")
-                    ? "Efecto activado"
-                    : "Activar efecto";
         });
+
     </script>
 
 </body>
